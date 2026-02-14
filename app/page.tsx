@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "../lib/SupabaseClient";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -12,7 +12,6 @@ export default function Home() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-
       if (user) {
         router.push("/dashboard");
       }
@@ -40,4 +39,5 @@ export default function Home() {
       </button>
     </div>
   );
+
 }
