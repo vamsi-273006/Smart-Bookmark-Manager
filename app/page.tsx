@@ -7,37 +7,43 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
 
+  // ✅ Redirect to dashboard if already logged in
   useEffect(() => {
     const checkUser = async () => {
       const {
         data: { user },
       } = await supabase.auth.getUser();
+
       if (user) {
-        router.push("/dashboard");
+        router.replace("/dashboard"); // better than push
       }
     };
 
     checkUser();
-  }, []);
+  }, [router]);
 
+  // ✅ Google Login
   const login = async () => {
-    await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${location.origin}/dashboard`,
+        redirectTo: `${window.location.origin}/dashboard`,
       },
     });
+
+    if (error) {
+      console.error("Login error:", error.message);
+    }
   };
 
   return (
     <div className="flex h-screen items-center justify-center">
       <button
         onClick={login}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-blue-600 text-white px-6 py-2 rounded-lg"
       >
         Login with Google
       </button>
     </div>
   );
-
 }
