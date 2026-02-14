@@ -32,7 +32,7 @@ Problem: App crashed after deploy.
 Solution: Added NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in Vercel dashboard.
 
 ## Live URL
-smart-bookmark-manager-mocha.vercel.app
+https://smart-bookmark-manager-mocha.vercel.app
 
 ## GitHub Repo
 https://github.com/vamsi-273006/bookmark-manager
